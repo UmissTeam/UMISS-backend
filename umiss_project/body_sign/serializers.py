@@ -1,14 +1,14 @@
 from rest_framework import serializers
-from body_sign.models import BodySignal
+from body_sign.models import HeartBeats, BodySignal
 from django.contrib.auth.models import User
 
 
-class BodySignalSerializer(serializers.HyperlinkedModelSerializer):
+class HeartBeatsSerializer(serializers.HyperlinkedModelSerializer):
     owner = serializers.ReadOnlyField(source='owner.username')
 
     class Meta:
-        model = BodySignal
-        fields = ('owner', 'created', 'type_signal')
+        model = HeartBeats
+        fields = ('owner', 'created', 'beats')
                   
 class UserSerializer(serializers.HyperlinkedModelSerializer):
     bodysignals = serializers.HyperlinkedRelatedField(queryset=BodySignal.objects.all(), view_name='bodysign-detail', many=True)
