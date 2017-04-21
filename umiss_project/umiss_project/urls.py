@@ -18,7 +18,7 @@ from body_sign import views
 from rest_framework.routers import DefaultRouter
 
 router = DefaultRouter()
-router.register(r'body_signal', views.BodySignalViewSet)
+router.register(r'heartbeats', views.HeartBeatsViewSet)
 router.register(r'users', views.UserViewSet)
 
 # The API URLs are now determined automatically by the router.

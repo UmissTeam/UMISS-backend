@@ -5,13 +5,13 @@ from rest_framework import renderers
 from rest_framework import viewsets
 from rest_framework.decorators import detail_route
 from rest_framework.response import Response
-from body_sign.models import BodySignal
+from body_sign.models import BodySignal, HeartBeats
 from body_sign.permissions import IsOwnerOrReadOnly
-from body_sign.serializers import BodySignalSerializer, UserSerializer
+from body_sign.serializers import HeartBeatsSerializer, UserSerializer
 
-class BodySignalViewSet(viewsets.ModelViewSet):
-    queryset = BodySignal.objects.all()
-    serializer_class = BodySignalSerializer
+class HeartBeatsViewSet(viewsets.ModelViewSet):
+    queryset = HeartBeats.objects.all()
+    serializer_class = HeartBeatsSerializer
     permission_classes = (permissions.IsAuthenticatedOrReadOnly,
                           IsOwnerOrReadOnly,)
 
