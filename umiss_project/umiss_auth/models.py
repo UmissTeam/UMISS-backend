@@ -31,3 +31,10 @@ class CustomUser(AbstractUser):
         ).hexdigest()
 
         super(CustomUser, self).save(*args, **kwargs)
+
+    def get_monitor_tokens(self):
+        tokens = []
+        for monitor in self.monitors.all():
+            tokens.append(monitor.token)
+
+        return tokens
