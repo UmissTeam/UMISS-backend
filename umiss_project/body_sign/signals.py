@@ -7,4 +7,7 @@ def signal_receiver(sender, weak=False, **kwargs):
     if not issubclass(sender, BodySignal):
         return
 
-    print("Created object!", kwargs)
+    body_signal = kwargs.get('instance')
+    monitors = body_signal.owner.monitors.all()
+    for monitor in monitors:
+        print('Hello {0.username}'.format(monitor))
