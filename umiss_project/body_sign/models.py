@@ -3,7 +3,7 @@ from django.core.validators import MaxValueValidator, MinValueValidator
 
 class BodySignal(models.Model):
     created = models.DateTimeField(auto_now_add=True)
-    owner = models.ForeignKey('auth.User', related_name='bodysignals')
+    owner = models.ForeignKey('umiss_auth.CustomUser', related_name='bodysignals')
 
     class Meta:
         ordering = ('created',)

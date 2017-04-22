@@ -38,16 +38,7 @@ class SkinTemperatureViewSet(viewsets.ModelViewSet):
     def perform_create(self, serializer):
         serializer.save(owner=self.request.user)
 
-class HeartBeatsViewSet(viewsets.ModelViewSet):
-    queryset = HeartBeats.objects.all()
-    serializer_class = HeartBeatsSerializer
-    permission_classes = (permissions.IsAuthenticatedOrReadOnly,
-                          IsOwnerOrReadOnly,)
 
-    def perform_create(self, serializer):
-        serializer.save(owner=self.request.user)
-
-
-class UserViewSet(viewsets.ReadOnlyModelViewSet):
-    queryset = User.objects.all()
-    serializer_class = UserSerializer
+# class UserViewSet(viewsets.ReadOnlyModelViewSet):
+#     queryset = User.objects.all()
+#     serializer_class = UserSerializer
