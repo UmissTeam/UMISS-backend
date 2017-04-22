@@ -25,7 +25,5 @@ router.register(r'skintemperature', views.SkinTemperatureViewSet)
 
 # The API URLs are now determined automatically by the router.
 # Additionally, we include the login URLs for the browsable API.
-urlpatterns = [
-    url(r'^', include(router.urls)),
-    url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework'))
-]
+urlpatterns = [url(r'^', include(router.urls)), url(
+    r'^api-auth/', include('rest_framework.urls', namespace='rest_framework'))]

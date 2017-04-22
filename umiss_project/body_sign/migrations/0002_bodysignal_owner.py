@@ -20,6 +20,9 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='bodysignal',
             name='owner',
-            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='bodysignals', to=settings.AUTH_USER_MODEL),
+            field=models.ForeignKey(
+                on_delete=django.db.models.deletion.CASCADE,
+                related_name='bodysignals',
+                to=settings.AUTH_USER_MODEL),
         ),
     ]

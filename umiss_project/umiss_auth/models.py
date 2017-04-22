@@ -2,6 +2,7 @@ from django.db import models
 import hashlib
 from django.contrib.auth.models import AbstractUser
 
+
 class CustomUser(AbstractUser):
     type_choices = (
         ('patient', 'User Type Pacient'),
@@ -21,7 +22,7 @@ class CustomUser(AbstractUser):
         related_name='monitors',
         on_delete=models.SET_NULL,
         null=True,
-        limit_choices_to=models.Q(user_type = 'monitor')
+        limit_choices_to=models.Q(user_type='monitor')
     )
 
     def save(self, *args, **kwargs):

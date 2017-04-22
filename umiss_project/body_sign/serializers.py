@@ -9,23 +9,27 @@ class HeartBeatsSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = HeartBeats
         fields = ('owner', 'created', 'beats')
-                  
+
+
 class GalvanicResistanceSerializer(serializers.HyperlinkedModelSerializer):
     owner = serializers.ReadOnlyField(source='owner.username')
 
     class Meta:
         model = GalvanicResistance
         fields = ('owner', 'created', 'resistance')
-                  
+
+
 class SkinTemperatureSerializer(serializers.HyperlinkedModelSerializer):
     owner = serializers.ReadOnlyField(source='owner.username')
 
     class Meta:
         model = SkinTemperature
         fields = ('owner', 'created', 'temperature')
-                  
+
+
 class UserSerializer(serializers.HyperlinkedModelSerializer):
-    bodysignals = serializers.HyperlinkedRelatedField(queryset=BodySignal.objects.all(), view_name='bodysign-detail', many=True)
+    bodysignals = serializers.HyperlinkedRelatedField(
+        queryset=BodySignal.objects.all(), view_name='bodysign-detail', many=True)
 
     class Meta:
         model = User

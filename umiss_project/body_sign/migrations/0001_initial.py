@@ -18,35 +18,83 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='BodySignal',
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('created', models.DateTimeField(auto_now_add=True)),
+                ('id',
+                 models.AutoField(
+                     auto_created=True,
+                     primary_key=True,
+                     serialize=False,
+                     verbose_name='ID')),
+                ('created',
+                 models.DateTimeField(
+                     auto_now_add=True)),
             ],
             options={
-                'ordering': ('created',),
+                'ordering': (
+                    'created',
+                ),
             },
         ),
         migrations.CreateModel(
             name='GalvanicResistance',
             fields=[
-                ('bodysignal_ptr', models.OneToOneField(auto_created=True, on_delete=django.db.models.deletion.CASCADE, parent_link=True, primary_key=True, serialize=False, to='body_sign.BodySignal')),
-                ('resistance', models.IntegerField(validators=[django.core.validators.MaxValueValidator(1000), django.core.validators.MinValueValidator(100)])),
+                ('bodysignal_ptr',
+                 models.OneToOneField(
+                     auto_created=True,
+                     on_delete=django.db.models.deletion.CASCADE,
+                     parent_link=True,
+                     primary_key=True,
+                     serialize=False,
+                     to='body_sign.BodySignal')),
+                ('resistance',
+                 models.IntegerField(
+                     validators=[
+                         django.core.validators.MaxValueValidator(1000),
+                         django.core.validators.MinValueValidator(100)])),
             ],
-            bases=('body_sign.bodysignal',),
+            bases=(
+                'body_sign.bodysignal',
+            ),
         ),
         migrations.CreateModel(
             name='HeartBeats',
             fields=[
-                ('bodysignal_ptr', models.OneToOneField(auto_created=True, on_delete=django.db.models.deletion.CASCADE, parent_link=True, primary_key=True, serialize=False, to='body_sign.BodySignal')),
-                ('beats', models.IntegerField(validators=[django.core.validators.MaxValueValidator(200), django.core.validators.MinValueValidator(0)])),
+                ('bodysignal_ptr',
+                 models.OneToOneField(
+                     auto_created=True,
+                     on_delete=django.db.models.deletion.CASCADE,
+                     parent_link=True,
+                     primary_key=True,
+                     serialize=False,
+                     to='body_sign.BodySignal')),
+                ('beats',
+                 models.IntegerField(
+                     validators=[
+                         django.core.validators.MaxValueValidator(200),
+                         django.core.validators.MinValueValidator(0)])),
             ],
-            bases=('body_sign.bodysignal',),
+            bases=(
+                'body_sign.bodysignal',
+            ),
         ),
         migrations.CreateModel(
             name='SkinTemperature',
             fields=[
-                ('bodysignal_ptr', models.OneToOneField(auto_created=True, on_delete=django.db.models.deletion.CASCADE, parent_link=True, primary_key=True, serialize=False, to='body_sign.BodySignal')),
-                ('temperature', models.IntegerField(validators=[django.core.validators.MaxValueValidator(39), django.core.validators.MinValueValidator(32)])),
+                ('bodysignal_ptr',
+                 models.OneToOneField(
+                     auto_created=True,
+                     on_delete=django.db.models.deletion.CASCADE,
+                     parent_link=True,
+                     primary_key=True,
+                     serialize=False,
+                     to='body_sign.BodySignal')),
+                ('temperature',
+                 models.IntegerField(
+                     validators=[
+                         django.core.validators.MaxValueValidator(39),
+                         django.core.validators.MinValueValidator(32)])),
             ],
-            bases=('body_sign.bodysignal',),
+            bases=(
+                'body_sign.bodysignal',
+            ),
         ),
     ]

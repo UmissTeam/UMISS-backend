@@ -20,6 +20,7 @@ class HeartBeatsViewSet(viewsets.ModelViewSet):
     def perform_create(self, serializer):
         serializer.save(owner=self.request.user)
 
+
 class GalvanicResistanceViewSet(viewsets.ModelViewSet):
     queryset = GalvanicResistance.objects.all()
     serializer_class = GalvanicResistanceSerializer
@@ -28,6 +29,7 @@ class GalvanicResistanceViewSet(viewsets.ModelViewSet):
 
     def perform_create(self, serializer):
         serializer.save(owner=self.request.user)
+
 
 class SkinTemperatureViewSet(viewsets.ModelViewSet):
     queryset = SkinTemperature.objects.all()
