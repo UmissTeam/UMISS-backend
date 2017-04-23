@@ -25,12 +25,3 @@ class SkinTemperatureSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = SkinTemperature
         fields = ('owner', 'created', 'temperature')
-
-
-class UserSerializer(serializers.HyperlinkedModelSerializer):
-    bodysignals = serializers.HyperlinkedRelatedField(
-        queryset=BodySignal.objects.all(), view_name='bodysign-detail', many=True)
-
-    class Meta:
-        model = User
-        fields = ('url', 'username', 'bodysignals')

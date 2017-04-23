@@ -15,13 +15,14 @@ Including another URLconf
 """
 from django.conf.urls import url, include
 from body_sign import views
+from umiss_auth.views import UserViewSet
 from rest_framework.routers import DefaultRouter
 
 router = DefaultRouter()
 router.register(r'heartbeats', views.HeartBeatsViewSet)
 router.register(r'galvanicresistance', views.GalvanicResistanceViewSet)
 router.register(r'skintemperature', views.SkinTemperatureViewSet)
-# router.register(r'users', views.UserViewSet)
+router.register(r'users', UserViewSet)
 
 # The API URLs are now determined automatically by the router.
 # Additionally, we include the login URLs for the browsable API.

@@ -7,7 +7,7 @@ from rest_framework.decorators import detail_route
 from rest_framework.response import Response
 from body_sign.models import BodySignal, HeartBeats, SkinTemperature, GalvanicResistance
 from body_sign.permissions import IsOwnerOrReadOnly
-from body_sign.serializers import HeartBeatsSerializer, UserSerializer, SkinTemperatureSerializer, GalvanicResistanceSerializer
+from body_sign.serializers import HeartBeatsSerializer, SkinTemperatureSerializer, GalvanicResistanceSerializer
 import body_sign.signals
 
 
@@ -39,8 +39,3 @@ class SkinTemperatureViewSet(viewsets.ModelViewSet):
 
     def perform_create(self, serializer):
         serializer.save(owner=self.request.user)
-
-
-# class UserViewSet(viewsets.ReadOnlyModelViewSet):
-#     queryset = User.objects.all()
-#     serializer_class = UserSerializer
