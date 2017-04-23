@@ -33,8 +33,5 @@ class CustomUser(AbstractUser):
         super(CustomUser, self).save(*args, **kwargs)
 
     def get_monitor_tokens(self):
-        tokens = []
-        for monitor in self.monitors.all():
-            tokens.append(monitor.token)
-
+        tokens = [monitor.token for monitor in self.monitors.all()]
         return tokens
