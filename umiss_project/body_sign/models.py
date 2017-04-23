@@ -26,6 +26,10 @@ class HeartBeats(BodySignal):
         ]
     )
 
+    def message(self):
+        """O paciente {0.owner} está com sinais alterados \
+        de Batimentos cardíacos com {0.beats}""".format(self)
+
 
 class GalvanicResistance(BodySignal):
     resistance = models.IntegerField(
@@ -35,6 +39,10 @@ class GalvanicResistance(BodySignal):
         ]
     )
 
+    def message(self):
+        """O paciente {0.owner} está com sinais alterados \
+        de Estresse com {0.resistance}""".format(self)
+
 
 class SkinTemperature(BodySignal):
     temperature = models.IntegerField(
@@ -43,3 +51,7 @@ class SkinTemperature(BodySignal):
             MinValueValidator(32)
         ]
     )
+
+    def message(self):
+        """O paciente {0.owner} está com sinais alterados \
+        de Temperatra corporal com {0.temperature}""".format(self)
