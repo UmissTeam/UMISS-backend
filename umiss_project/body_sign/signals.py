@@ -10,4 +10,4 @@ def signal_receiver(sender, weak=False, **kwargs):
         return
 
     body_signal = kwargs.get('instance')
-    send_notification(body_signal)
+    # send_notification(body_signal)
