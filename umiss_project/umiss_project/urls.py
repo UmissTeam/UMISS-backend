@@ -20,9 +20,9 @@ from rest_framework.routers import DefaultRouter
 from rest_framework.authtoken.views import obtain_auth_token
 
 router = DefaultRouter(trailing_slash=False)
-router.register(r'heartbeats', views.HeartBeatsViewSet)
-router.register(r'galvanicresistance', views.GalvanicResistanceViewSet)
-router.register(r'skintemperature', views.SkinTemperatureViewSet)
+router.register(r'heart_beats', views.HeartBeatsViewSet)
+router.register(r'galvanic_resistances', views.GalvanicResistanceViewSet)
+router.register(r'skin_temperatures', views.SkinTemperatureViewSet)
 router.register(r'users', UserViewSet)
 
 # The API URLs are now determined automatically by the router.
