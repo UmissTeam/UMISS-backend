@@ -7,6 +7,8 @@ from rest_framework.decorators import detail_route
 from rest_framework.response import Response
 from body_sign.models import BodySignal, HeartBeats, SkinTemperature, GalvanicResistance
 from body_sign.permissions import IsOwnerOrReadOnly
+from rest_framework.authentication import TokenAuthentication
+from rest_framework.permissions import IsAuthenticated
 from body_sign.serializers import HeartBeatsSerializer, SkinTemperatureSerializer, GalvanicResistanceSerializer
 import body_sign.signals
 
@@ -14,8 +16,8 @@ import body_sign.signals
 class HeartBeatsViewSet(viewsets.ModelViewSet):
     queryset = HeartBeats.objects.all()
     serializer_class = HeartBeatsSerializer
-    permission_classes = (permissions.IsAuthenticatedOrReadOnly,
-                          IsOwnerOrReadOnly,)
+    authentication_classes = (TokenAuthentication,)
+    permission_classes = (IsAuthenticated,)
 
     def perform_create(self, serializer):
         serializer.save(owner=self.request.user)
@@ -24,8 +26,8 @@ class HeartBeatsViewSet(viewsets.ModelViewSet):
 class GalvanicResistanceViewSet(viewsets.ModelViewSet):
     queryset = GalvanicResistance.objects.all()
     serializer_class = GalvanicResistanceSerializer
-    permission_classes = (permissions.IsAuthenticatedOrReadOnly,
-                          IsOwnerOrReadOnly,)
+    authentication_classes = (TokenAuthentication,)
+    permission_classes = (IsAuthenticated,)
 
     def perform_create(self, serializer):
         serializer.save(owner=self.request.user)
@@ -34,8 +36,8 @@ class GalvanicResistanceViewSet(viewsets.ModelViewSet):
 class SkinTemperatureViewSet(viewsets.ModelViewSet):
     queryset = SkinTemperature.objects.all()
     serializer_class = SkinTemperatureSerializer
-    permission_classes = (permissions.IsAuthenticatedOrReadOnly,
-                          IsOwnerOrReadOnly,)
+    authentication_classes = (TokenAuthentication,)
+    permission_classes = (IsAuthenticated,)
 
     def perform_create(self, serializer):
         serializer.save(owner=self.request.user)
