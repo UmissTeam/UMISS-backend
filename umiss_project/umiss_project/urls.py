@@ -17,14 +17,18 @@ from django.conf.urls import url, include
 from body_sign import views
 from umiss_auth.views import UserViewSet
 from rest_framework.routers import DefaultRouter
+from rest_framework.authtoken.views import obtain_auth_token
 
-router = DefaultRouter()
-router.register(r'heartbeats', views.HeartBeatsViewSet)
-router.register(r'galvanicresistance', views.GalvanicResistanceViewSet)
-router.register(r'skintemperature', views.SkinTemperatureViewSet)
+router = DefaultRouter(trailing_slash=False)
+router.register(r'heart_beats', views.HeartBeatsViewSet)
+router.register(r'galvanic_resistances', views.GalvanicResistanceViewSet)
+router.register(r'skin_temperatures', views.SkinTemperatureViewSet)
 router.register(r'users', UserViewSet)
 
 # The API URLs are now determined automatically by the router.
 # Additionally, we include the login URLs for the browsable API.
-urlpatterns = [url(r'^', include(router.urls)), url(
-    r'^api-auth/', include('rest_framework.urls', namespace='rest_framework'))]
+urlpatterns = [
+    url(r'^api/', include(router.urls)),
+    url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
+    url(r'^api-auth-token/', obtain_auth_token)
+]
