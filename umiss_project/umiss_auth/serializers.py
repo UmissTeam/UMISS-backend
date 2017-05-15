@@ -9,10 +9,20 @@ class UserSerializer(serializers.HyperlinkedModelSerializer):
         fields = ('url', 'username')
 
 
-class MonitorUserSerializer(UserSerializer):
+class MonitorUserSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = MonitorUser
+        fields = ('url', 'username', 'password')
 
-class PatientUserSerializer(UserSerializer):
+    def create(self, validated_data):
+        user = MonitorUser.objects.create_user(**validated_data)
+        return user
+
+class PatientUserSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = PatientUser
+        fields = ('url', 'username', 'password')
+
+    def create(self, validated_data):
+        user = PatientUser.objects.create_user(**validated_data)
+        return user
