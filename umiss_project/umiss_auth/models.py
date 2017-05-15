@@ -26,9 +26,9 @@ class PatientUser(CustomUser):
         null=True,
     )
 
+
     def get_monitor_tokens(self):
-        tokens = [monitor.token for monitor in self.monitors.all()]
-        return tokens
+        return [monitor.token for monitor in self.monitors.all()]
 
 
 class MonitorUser(CustomUser):
