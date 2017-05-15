@@ -11,6 +11,13 @@ class BodySignal(models.Model):
         on_delete=models.CASCADE
     )
 
+    is_critical = models.BooleanField(
+        blank=False,
+        null=False,
+        editable=False,
+        default=False,
+    )
+
     class Meta:
         ordering = ('created',)
 
