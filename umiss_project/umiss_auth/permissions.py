@@ -1,5 +1,24 @@
 from rest_framework import permissions
 
+class IsAnonCreate(permissions.BasePermission):
+    def has_permission(self, request, view):
+        print("ho")
+        if request.method == "POST" and not request.user.is_authenticated():
+            return True
+        elif not request.user.is_authenticated() and request.method != "POST":
+            return False
+        elif request.method in permissions.SAFE_METHODS:
+            return True
+
+        return False
+
+    def has_object_permission(self, request, view, obj):
+        if not request.user.is_authenticated():
+            return False
+        if request.method in permissions.SAFE_METHODS:
+            return True
+
+        return obj.username == request.user.username
 
 class IsOwnerOrReadOnly(permissions.BasePermission):
     """
