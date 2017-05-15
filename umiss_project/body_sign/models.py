@@ -14,7 +14,6 @@ class BodySignal(models.Model):
     is_critical = models.BooleanField(
         blank=False,
         null=False,
-        editable=False,
         default=False,
     )
 

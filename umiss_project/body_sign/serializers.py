@@ -8,7 +8,7 @@ class HeartBeatsSerializer(serializers.HyperlinkedModelSerializer):
 
     class Meta:
         model = HeartBeats
-        fields = ('owner', 'created', 'beats')
+        fields = ('owner', 'created', 'beats', 'is_critical')
 
 
 class GalvanicResistanceSerializer(serializers.HyperlinkedModelSerializer):
@@ -16,7 +16,7 @@ class GalvanicResistanceSerializer(serializers.HyperlinkedModelSerializer):
 
     class Meta:
         model = GalvanicResistance
-        fields = ('owner', 'created', 'resistance')
+        fields = ('owner', 'created', 'resistance', 'is_critical')
 
 
 class SkinTemperatureSerializer(serializers.HyperlinkedModelSerializer):
@@ -24,4 +24,4 @@ class SkinTemperatureSerializer(serializers.HyperlinkedModelSerializer):
 
     class Meta:
         model = SkinTemperature
-        fields = ('owner', 'created', 'temperature')
+        fields = ('owner', 'created', 'temperature', 'is_critical')
