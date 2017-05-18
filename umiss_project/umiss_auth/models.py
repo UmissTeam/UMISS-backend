@@ -6,16 +6,15 @@ from django.contrib.auth.models import AbstractUser
 class CustomUser(AbstractUser):
     token = models.CharField(
         max_length=512,
-        editable=False,
         null=False
     )
 
-    def save(self, *args, **kwargs):
-        self.token = hashlib.sha512(
-            self.token.encode('utf-8')
-        ).hexdigest()
-
-        super(CustomUser, self).save(*args, **kwargs)
+    # def save(self, *args, **kwargs):
+    #     self.token = hashlib.sha512(
+    #         self.token.encode('utf-8')
+    #     ).hexdigest()
+    #
+    #     super(CustomUser, self).save(*args, **kwargs)
 
 
 class PatientUser(CustomUser):
