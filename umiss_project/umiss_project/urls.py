@@ -20,7 +20,7 @@ from rest_framework.routers import DefaultRouter
 from rest_framework.authtoken.views import obtain_auth_token
 from rest_framework_swagger.views import get_swagger_view
 
-schema_view = get_swagger_view(title='Pastebin API')
+schema_view = get_swagger_view(title='Umiss API Documentation')
 
 
 router = DefaultRouter(trailing_slash=False)
