@@ -21,6 +21,10 @@ class MonitorViewSet(viewsets.ModelViewSet):
 
     permission_classes = (IsAnonCreate,)
 
+    def put(self, request, *args, **kwargs):
+        print("put")
+        return self.update(request, *args, **kwargs)
+
 class PatienteViewSet(viewsets.ModelViewSet):
     queryset = PatientUser.objects.all()
     serializer_class = PatientUserSerializer
