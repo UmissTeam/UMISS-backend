@@ -6,7 +6,7 @@ from django.contrib.auth.models import AbstractUser
 class CustomUser(AbstractUser):
     token = models.CharField(
         max_length=512,
-        null=False
+        null=True
     )
 
     # def save(self, *args, **kwargs):
@@ -33,7 +33,6 @@ class PatientUser(CustomUser):
 class MonitorUser(CustomUser):
     android_token = models.CharField(
         max_length=512,
-        editable=True,
-        null=False,
-        blank=False
+        null=True,
+        blank=True
     )
