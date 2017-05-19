@@ -89,4 +89,4 @@ ENV/
 .ropeproject
 
 # DB
-*sqlite3
+*.sqlite3
