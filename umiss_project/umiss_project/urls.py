@@ -18,6 +18,10 @@ from body_sign import views
 from umiss_auth.views import UserViewSet, MonitorViewSet, PatienteViewSet
 from rest_framework.routers import DefaultRouter
 from rest_framework.authtoken.views import obtain_auth_token
+from rest_framework_swagger.views import get_swagger_view
+
+schema_view = get_swagger_view(title='Pastebin API')
+
 
 router = DefaultRouter(trailing_slash=False)
 router.register(r'heart_beats', views.HeartBeatsViewSet)
@@ -33,4 +37,6 @@ urlpatterns = [
     url(r'^api/', include(router.urls)),
     url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
     url(r'^api-auth-token/', obtain_auth_token),
+    # url(r'^docs/', include('rest_framework_docs.urls')),
+    url(r'^docs/', schema_view),
 ]

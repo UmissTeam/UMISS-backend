@@ -42,6 +42,8 @@ INSTALLED_APPS = [
     'rest_framework',
     'body_sign',
     'umiss_auth',
+    'rest_framework_docs',
+    'rest_framework_swagger',
 ]
 
 REST_FRAMEWORK = {
