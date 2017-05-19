@@ -7,3 +7,4 @@ pygments
 coreapi
 markdown
 drfdocs
+django-rest-swagger
