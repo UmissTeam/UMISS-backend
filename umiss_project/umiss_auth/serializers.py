@@ -22,7 +22,6 @@ class MonitorUserSerializer(serializers.HyperlinkedModelSerializer):
     def update(self, instance, validated_data):
         for attr, value in validated_data.items():
             if attr == 'password':
-                print(value)
                 instance.set_password(value)
             else:
                 setattr(instance, attr, value)
@@ -41,7 +40,6 @@ class PatientUserSerializer(serializers.HyperlinkedModelSerializer):
     def update(self, instance, validated_data):
         for attr, value in validated_data.items():
             if attr == 'password':
-                print(value)
                 instance.set_password(value)
             else:
                 setattr(instance, attr, value)

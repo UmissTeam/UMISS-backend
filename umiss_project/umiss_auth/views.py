@@ -22,8 +22,10 @@ class MonitorViewSet(viewsets.ModelViewSet):
     permission_classes = (IsAnonCreate,)
 
     def put(self, request, *args, **kwargs):
-        print("put")
         return self.update(request, *args, **kwargs)
+
+    def get_object(self):
+        return self.request.user
 
 class PatienteViewSet(viewsets.ModelViewSet):
     queryset = PatientUser.objects.all()
@@ -31,3 +33,8 @@ class PatienteViewSet(viewsets.ModelViewSet):
     write_only_fields = ('password',)
 
     permission_classes = (IsAnonCreate,)
+
+    def put(self, request, *args, **kwargs):
+        return self.update(request, *args, **kwargs)
+
+
