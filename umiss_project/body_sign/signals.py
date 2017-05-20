@@ -10,4 +10,6 @@ def signal_receiver(sender, weak=False, **kwargs):
         return
 
     body_signal = kwargs.get('instance')
+    if not body_signal.is_critical:
+        return
     # send_notification(body_signal)

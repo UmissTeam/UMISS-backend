@@ -9,12 +9,6 @@ class CustomUser(AbstractUser):
         null=True
     )
 
-    # def save(self, *args, **kwargs):
-    #     self.token = hashlib.sha512(
-    #         self.token.encode('utf-8')
-    #     ).hexdigest()
-    #
-    #     super(CustomUser, self).save(*args, **kwargs)
 
 
 class PatientUser(CustomUser):
@@ -35,4 +29,25 @@ class MonitorUser(CustomUser):
         max_length=512,
         null=True,
         blank=True
-    )
+    ) 
+
+    __original_token = None
+
+    def __init__(self, *args, **kwargs):
+        super(CustomUser, self).__init__(*args, **kwargs)
+        self.__original_token = self.token
+
+    def save(self, force_insert=False, force_update=False, *args, **kwargs):
+        """Adding a monitor to a patient if the token can be same"""
+        if self.token != self.__original_token:
+            patient = PatientUser.objects.filter(token=self.token)
+            if len(patient):
+                self.monitors.add(patient[0])
+            else:
+                self.monitors.clear()
+
+        super(CustomUser, self).save(force_insert, force_update, *args, **kwargs)
+        self.__original_token = self.token
+
+    def get_patients_tokens(self):
+        return [patient.token for patient in PatientUser.objects.all()]
