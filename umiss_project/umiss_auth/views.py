@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from .models import CustomUser
-from .serializers import UserSerializer, MonitorUserSerializer, PatientUserSerializer
-from .models import MonitorUser, PatientUser
+from .serializers import UserSerializer, MonitorSerializer, PatientUserSerializer
+from .models import Monitor, PatientUser
 from rest_framework import viewsets
 from rest_framework import permissions
 from .permissions import IsAnonCreate
@@ -15,8 +15,8 @@ class UserViewSet(viewsets.ReadOnlyModelViewSet):
     permission_classes = (IsAnonCreate,)
 
 class MonitorViewSet(viewsets.ModelViewSet):
-    queryset = MonitorUser.objects.all()
-    serializer_class = MonitorUserSerializer
+    queryset = Monitor.objects.all()
+    serializer_class = MonitorSerializer
     write_only_fields = ('password')
 
     permission_classes = (IsAnonCreate,)

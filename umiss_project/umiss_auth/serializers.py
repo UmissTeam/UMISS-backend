@@ -1,6 +1,6 @@
 from rest_framework import serializers
 from body_sign.models import HeartBeats, BodySignal
-from .models import CustomUser, MonitorUser, PatientUser
+from .models import CustomUser, Monitor, PatientUser
 
 
 class UserSerializer(serializers.HyperlinkedModelSerializer):
@@ -9,13 +9,13 @@ class UserSerializer(serializers.HyperlinkedModelSerializer):
         fields = ('url', 'username')
 
 
-class MonitorUserSerializer(serializers.HyperlinkedModelSerializer):
+class MonitorSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
-        model = MonitorUser
+        model = Monitor
         fields = ('url', 'username', 'password', 'android_token', 'token')
 
     def create(self, validated_data):
-        user = MonitorUser.objects.create_user(**validated_data)
+        user = Monitor.objects.create_user(**validated_data)
         return user
 
 

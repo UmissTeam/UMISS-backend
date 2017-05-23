@@ -24,7 +24,7 @@ class PatientUser(CustomUser):
         return [monitor.token for monitor in self.monitors.all()]
 
 
-class MonitorUser(CustomUser):
+class Monitor(CustomUser):
     android_token = models.CharField(
         max_length=512,
         null=True,
