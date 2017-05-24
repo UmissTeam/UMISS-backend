@@ -18,32 +18,54 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='MonitorUser',
             fields=[
-                ('customuser_ptr', models.OneToOneField(auto_created=True, on_delete=django.db.models.deletion.CASCADE, parent_link=True, primary_key=True, serialize=False, to=settings.AUTH_USER_MODEL)),
-                ('android_token', models.CharField(max_length=512)),
+                ('customuser_ptr',
+                 models.OneToOneField(
+                     auto_created=True,
+                     on_delete=django.db.models.deletion.CASCADE,
+                     parent_link=True,
+                     primary_key=True,
+                     serialize=False,
+                     to=settings.AUTH_USER_MODEL)),
+                ('android_token',
+                 models.CharField(
+                     max_length=512)),
             ],
             options={
                 'abstract': False,
                 'verbose_name_plural': 'users',
                 'verbose_name': 'user',
             },
-            bases=('umiss_auth.customuser',),
+            bases=(
+                'umiss_auth.customuser',
+            ),
             managers=[
-                ('objects', django.contrib.auth.models.UserManager()),
+                ('objects',
+                 django.contrib.auth.models.UserManager()),
             ],
         ),
         migrations.CreateModel(
             name='PatientUser',
             fields=[
-                ('customuser_ptr', models.OneToOneField(auto_created=True, on_delete=django.db.models.deletion.CASCADE, parent_link=True, primary_key=True, serialize=False, to=settings.AUTH_USER_MODEL)),
+                ('customuser_ptr',
+                 models.OneToOneField(
+                     auto_created=True,
+                     on_delete=django.db.models.deletion.CASCADE,
+                     parent_link=True,
+                     primary_key=True,
+                     serialize=False,
+                     to=settings.AUTH_USER_MODEL)),
             ],
             options={
                 'abstract': False,
                 'verbose_name_plural': 'users',
                 'verbose_name': 'user',
             },
-            bases=('umiss_auth.customuser',),
+            bases=(
+                'umiss_auth.customuser',
+            ),
             managers=[
-                ('objects', django.contrib.auth.models.UserManager()),
+                ('objects',
+                 django.contrib.auth.models.UserManager()),
             ],
         ),
         migrations.RemoveField(
@@ -57,6 +79,10 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='patientuser',
             name='monitor_users',
-            field=models.ForeignKey(null=True, on_delete=django.db.models.deletion.SET_NULL, related_name='monitors', to=settings.AUTH_USER_MODEL),
+            field=models.ForeignKey(
+                null=True,
+                on_delete=django.db.models.deletion.SET_NULL,
+                related_name='monitors',
+                to=settings.AUTH_USER_MODEL),
         ),
     ]

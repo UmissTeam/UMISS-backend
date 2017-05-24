@@ -10,7 +10,6 @@ class CustomUser(AbstractUser):
     )
 
 
-
 class PatientUser(CustomUser):
     monitor_users = models.ForeignKey(
         'umiss_auth.CustomUser',
@@ -18,7 +17,6 @@ class PatientUser(CustomUser):
         on_delete=models.SET_NULL,
         null=True,
     )
-
 
     def get_monitor_tokens(self):
         return [monitor.token for monitor in self.monitors.all()]
@@ -29,7 +27,7 @@ class Monitor(CustomUser):
         max_length=512,
         null=True,
         blank=True
-    ) 
+    )
 
     __original_token = None
 
@@ -46,7 +44,14 @@ class Monitor(CustomUser):
             else:
                 self.monitors.clear()
 
-        super(CustomUser, self).save(force_insert, force_update, *args, **kwargs)
+        super(
+            CustomUser,
+            self).save(
+            force_insert,
+            force_update,
+            *
+            args,
+            **kwargs)
         self.__original_token = self.token
 
     def get_patients_tokens(self):

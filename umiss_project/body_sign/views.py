@@ -24,6 +24,7 @@ class HeartBeatsViewSet(viewsets.ModelViewSet):
         patient = monitor.monitors.first()
         return HeartBeats.objects.filter(owner=patient)
 
+
 class GalvanicResistanceViewSet(viewsets.ModelViewSet):
     queryset = GalvanicResistance.objects.all()
     serializer_class = GalvanicResistanceSerializer

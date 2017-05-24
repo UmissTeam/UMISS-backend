@@ -14,6 +14,7 @@ class UserViewSet(viewsets.ReadOnlyModelViewSet):
 
     permission_classes = (IsAnonCreate,)
 
+
 class MonitorViewSet(viewsets.ModelViewSet):
     queryset = Monitor.objects.all()
     serializer_class = MonitorSerializer
@@ -21,11 +22,20 @@ class MonitorViewSet(viewsets.ModelViewSet):
 
     permission_classes = (IsAnonCreate,)
 
+    def perform_update(self, serializer):
+        serializer.save(owner=self.request.user)
+
     def put(self, request, *args, **kwargs):
         return self.update(request, *args, **kwargs)
 
     def get_object(self):
-        return self.request.user
+        pk = self.kwargs.get('pk')
+        user_id = str(self.request.user.id)
+        if pk != user_id:
+            return self.request.user
+
+        return super(MonitorViewSet, self).get_object()
+
 
 class PatienteViewSet(viewsets.ModelViewSet):
     queryset = PatientUser.objects.all()
@@ -36,5 +46,3 @@ class PatienteViewSet(viewsets.ModelViewSet):
 
     def put(self, request, *args, **kwargs):
         return self.update(request, *args, **kwargs)
-
-

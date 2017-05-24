@@ -18,7 +18,6 @@ class MonitorSerializer(serializers.HyperlinkedModelSerializer):
         user = Monitor.objects.create_user(**validated_data)
         return user
 
-
     def update(self, instance, validated_data):
         for attr, value in validated_data.items():
             if attr == 'password':
@@ -27,6 +26,7 @@ class MonitorSerializer(serializers.HyperlinkedModelSerializer):
                 setattr(instance, attr, value)
         instance.save()
         return instance
+
 
 class PatientUserSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
