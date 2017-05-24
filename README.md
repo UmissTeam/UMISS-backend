@@ -22,3 +22,7 @@ Create tables in db<br>
 
 So, you can acess the network with this url on browser:
 `localhost:8000/`
+
+Documentation can be access on:
+`localhost:8000/docs`
+

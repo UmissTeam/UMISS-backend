@@ -11,13 +11,6 @@ class CustomUser(AbstractUser):
 
 
 class PatientUser(CustomUser):
-    monitor_users = models.ForeignKey(
-        'umiss_auth.CustomUser',
-        related_name='monitors',
-        on_delete=models.SET_NULL,
-        null=True,
-    )
-
     def get_monitor_tokens(self):
         return [monitor.token for monitor in self.monitors.all()]
 
@@ -29,20 +22,24 @@ class Monitor(CustomUser):
         blank=True
     )
 
+    monitor_user = models.ForeignKey(
+        'umiss_auth.CustomUser',
+        related_name='monitors',
+        on_delete=models.SET_NULL,
+        null=True,
+    )
+
     __original_token = None
 
     def __init__(self, *args, **kwargs):
+        # patient = PatientUser.objects.filter(token=kwargs['token'])
+        # print(args, kwargs, patient)
         super(CustomUser, self).__init__(*args, **kwargs)
         self.__original_token = self.token
 
     def save(self, force_insert=False, force_update=False, *args, **kwargs):
         """Adding a monitor to a patient if the token can be same"""
-        if self.token != self.__original_token:
-            patient = PatientUser.objects.filter(token=self.token)
-            if len(patient):
-                self.monitors.add(patient[0])
-            else:
-                self.monitors.clear()
+
 
         super(
             CustomUser,
@@ -52,6 +49,17 @@ class Monitor(CustomUser):
             *
             args,
             **kwargs)
+
+        qs_patient = PatientUser.objects.filter(token=self.token)
+        if len(qs_patient):
+            patient = qs_patient[0]
+            patient.monitors.add(self)
+            patient.save()
+        else:
+            try:
+                self.monitor_user.monitors.remove(self)
+            except AttributeError:
+                pass
         self.__original_token = self.token
 
     def get_patients_tokens(self):
