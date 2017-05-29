@@ -21,6 +21,10 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='monitor',
             name='monitor_user',
-            field=models.ForeignKey(null=True, on_delete=django.db.models.deletion.SET_NULL, related_name='monitors', to=settings.AUTH_USER_MODEL),
+            field=models.ForeignKey(
+                null=True,
+                on_delete=django.db.models.deletion.SET_NULL,
+                related_name='monitors',
+                to=settings.AUTH_USER_MODEL),
         ),
     ]

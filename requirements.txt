@@ -46,3 +46,5 @@ termcolor==1.1.0
 tornado==4.5.1
 uritemplate==3.0.0
 wcwidth==0.1.7
+django-extensions
+fcm-django

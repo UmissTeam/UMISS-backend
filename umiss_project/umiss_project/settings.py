@@ -44,7 +44,13 @@ INSTALLED_APPS = [
     'umiss_auth',
     'rest_framework_docs',
     'rest_framework_swagger',
+    'django_extensions',
+    "fcm_django",
 ]
+
+FCM_DJANGO_SETTINGS = {
+    "FCM_SERVER_KEY": "AAAA_UbbzN0:APA91bFvvMrXKy2FqUb8eiV0y5oPYNn7IQJwyaoA2Kp9SzZPwsG4U2W45jC2J3U3BpIuc7aaxBY5a42jqADLXpklnyxoE9rLaJP1ybdYiiAJZvv0IYftt0fwqLV20tY5kaOp2GVcn9Gc"
+}
 
 REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES': [

@@ -9,10 +9,12 @@ class CustomUser(AbstractUser):
         null=True
     )
 
+    def get_monitor_tokens(self):
+        return [monitor.android_token for monitor in self.monitors.all()]
+
 
 class PatientUser(CustomUser):
-    def get_monitor_tokens(self):
-        return [monitor.token for monitor in self.monitors.all()]
+    pass
 
 
 class Monitor(CustomUser):
@@ -39,7 +41,6 @@ class Monitor(CustomUser):
 
     def save(self, force_insert=False, force_update=False, *args, **kwargs):
         """Adding a monitor to a patient if the token can be same"""
-
 
         super(
             CustomUser,
