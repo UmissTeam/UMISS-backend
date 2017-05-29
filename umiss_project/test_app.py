@@ -1,14 +1,38 @@
+__author__ = "Tiago ASsuncao"
+__copyright__ = "Copyright 2017, The Cogent Project"
+__credits__ = ["Tiago Assuncao",]
+__license__ = "GPL"
+__version__ = "1.1.5"
+__maintainer__ = "Tiago Assuncao"
+__email__ = "thiagoribeironiquel@hotmail.com"
+__status__ = "Production"
+
+"""
+This file will create monitors and patients on given server.
+You can create many signal, add other values on signals_to_send.
+"""
+
 import requests
 import random
 import string
+import argparse
+
 
 signals_to_send = [
     ('heart_beats', 'beats'),
+    ('skin_temperatures', 'temperature'),
+    ('galvanic_resistances', 'resistance'),
     ('heart_beats', 'beats'),
     ('galvanic_resistances', 'resistance'),
     ('skin_temperatures', 'temperature'),
     ('galvanic_resistances', 'resistance'),
+    ('skin_temperatures', 'temperature'),
     ('heart_beats', 'beats'),
+    ('skin_temperatures', 'temperature'),
+    ('galvanic_resistances', 'resistance'),
+    ('skin_temperatures', 'temperature'),
+    ('skin_temperatures', 'temperature'),
+    ('galvanic_resistances', 'resistance'),
 ]
 
 
@@ -17,18 +41,29 @@ def id_gen(size=6, chars=string.ascii_uppercase + string.digits):
 
 
 def prRed(prt): print("\033[91m {}\033[00m" .format(prt))
+
+
 def prGreen(prt): print("\033[92m {}\033[00m" .format(prt))
+
+
 def prYellow(prt): print("\033[93m {}\033[00m" .format(prt))
+
+
 def prLightPurple(prt): print("\033[94m {}\033[00m" .format(prt))
+
+
 def prPurple(prt): print("\033[95m {}\033[00m" .format(prt))
+
+
 def prCyan(prt): print("\033[96m {}\033[00m" .format(prt))
+
+
 def prLightGray(prt): print("\033[97m {}\033[00m" .format(prt))
+
+
 def prBlack(prt): print("\033[98m {}\033[00m" .format(prt))
 
 
-server = 'http://{}'.format('104.196.160.171')
-url = server + '/api/'
-url_auth = server + '/api-auth-token/'
 
 token = id_gen(6)
 username = id_gen()
@@ -112,6 +147,19 @@ def create_signals(patient, signal='heart_beats', attribute='beats'):
     return signal_response
 
 
+def call_parser():
+    parser = argparse.ArgumentParser("simple_example")
+    parser.add_argument(
+        "server",
+        help="IP do servidor com a porta que está rodando.",
+        type=str)
+    args = parser.parse_args()
+
+    global server, url, url_auth
+    server = 'http://{}'.format(args.server)
+    url = server + '/api/'
+    url_auth = server + '/api-auth-token/'
+
 def list_signals(monitor, signal='heart_beats'):
     signal_response = requests.get(
         url + signal,
@@ -129,8 +177,10 @@ def call_signals(patient):
         signal = create_signals(patient, signal_type, attribute)
         print(" Signal id: {}".format(signal.json()['data']['id']))
 
-
 if __name__ == "__main__":
+    call_parser()
+
+    prGreen("Aplicando teste no servidor {}".format(server))
     prGreen('Criando paciente...')
     patient = create_patient()
     print(" Paciente {} criado".format(patient['username']))
