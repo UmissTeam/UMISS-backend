@@ -4,7 +4,7 @@ from fcm_django.models import FCMDevice
 
 def send_notification(body_signal):
     patient = body_signal.owner
-    monitor_tokens= patient.get_monitor_tokens()
+    monitor_tokens = patient.get_monitor_tokens()
     message_title = "Paciente {} Alerta".format(patient)
     message_body = "O paciente {0} teve um sinal alterado".format(patient)
 

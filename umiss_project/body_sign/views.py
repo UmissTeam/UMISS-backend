@@ -8,6 +8,7 @@ from rest_framework.response import Response
 from body_sign.models import BodySignal, HeartBeats, SkinTemperature, GalvanicResistance
 from body_sign.permissions import IsOwnerOrReadOnly
 from body_sign.serializers import HeartBeatsSerializer, SkinTemperatureSerializer, GalvanicResistanceSerializer
+from umiss_auth.models import Monitor
 import body_sign.signals
 
 
@@ -20,8 +21,9 @@ class HeartBeatsViewSet(viewsets.ModelViewSet):
         serializer.save(owner=self.request.user)
 
     def get_queryset(self):
-        monitor = self.request.user
-        patient = monitor.monitors.first()
+        monitor_id = self.request.user.id
+        monitor = Monitor.objects.get(id=monitor_id)
+        patient = monitor.monitor_user
         return HeartBeats.objects.filter(owner=patient)
 
 
@@ -34,8 +36,9 @@ class GalvanicResistanceViewSet(viewsets.ModelViewSet):
         serializer.save(owner=self.request.user)
 
     def get_queryset(self):
-        monitor = self.request.user
-        patient = monitor.monitors.first()
+        monitor_id = self.request.user.id
+        monitor = Monitor.objects.get(id=monitor_id)
+        patient = monitor.monitor_user
         return GalvanicResistance.objects.filter(owner=patient)
 
 
@@ -48,6 +51,7 @@ class SkinTemperatureViewSet(viewsets.ModelViewSet):
         serializer.save(owner=self.request.user)
 
     def get_queryset(self):
-        monitor = self.request.user
-        patient = monitor.monitors.first()
+        monitor_id = self.request.user.id
+        monitor = Monitor.objects.get(id=monitor_id)
+        patient = monitor.monitor_user
         return SkinTemperature.objects.filter(owner=patient)
