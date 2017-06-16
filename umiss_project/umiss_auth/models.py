@@ -1,6 +1,7 @@
 from django.db import models
 import hashlib
 from django.contrib.auth.models import AbstractUser
+from notification.utils import logout_notify
 
 
 class CustomUser(AbstractUser):
@@ -31,6 +32,9 @@ class Monitor(CustomUser):
         null=True,
     )
 
+    is_logged = models.BooleanField(blank=True, default=False)
+            
+
     __original_token = None
 
     def __init__(self, *args, **kwargs):
@@ -41,6 +45,10 @@ class Monitor(CustomUser):
 
     def save(self, force_insert=False, force_update=False, *args, **kwargs):
         """Adding a monitor to a patient if the token can be same"""
+
+        def logout_user(self):
+            if is_logged is False and android_token is not None:
+                logout_notify(self.android_token)
 
         super(
             CustomUser,
