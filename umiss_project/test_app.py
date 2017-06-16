@@ -152,6 +152,7 @@ def call_parser():
     parser.add_argument(
         "server",
         help="IP do servidor com a porta que está rodando.",
+        default='localhost:8000',
         type=str)
     args = parser.parse_args()
 
