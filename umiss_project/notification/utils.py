@@ -19,3 +19,9 @@ def send_notification(body_signal):
             title=message_title,
             body=message_body,
             data=data_message)
+
+def logout_notify(token):        
+    device = FCMDevice(registration_id=token, type='android')
+    data_message = {"Type": "logout"}
+    device.send_message(data=data_message)
+
