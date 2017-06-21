@@ -26,6 +26,7 @@ SECRET_KEY = '*huz)(ooodwh&$c-a)hsrn&9-%4@7)c!3!41iu)tc3o^9$+o5u'
 DEBUG = True
 
 CORS_ORIGIN_ALLOW_ALL = True
+ALLOWED_HOSTS = ['104.196.160.171']
 
 # Application definition
 
@@ -113,8 +114,12 @@ WSGI_APPLICATION = 'umiss_project.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'umiss_project',
+        'USER': 'umiis_user',
+        'PASSWORD': 'umiss_password',
+        'HOST': 'localhost',
+        'PORT': '',
     }
 }
 
@@ -159,3 +164,6 @@ STATIC_URL = '/static/'
 
 # Change default User class
 AUTH_USER_MODEL = 'umiss_auth.CustomUser'
+
+
+STATIC_ROOT = os.path.join(BASE_DIR, 'static/')

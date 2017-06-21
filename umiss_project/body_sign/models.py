@@ -61,8 +61,8 @@ class GalvanicResistance(BodySignal):
 class SkinTemperature(BodySignal):
     temperature = models.IntegerField(
         validators=[
-            MaxValueValidator(39),
-            MinValueValidator(32)
+            MaxValueValidator(100),
+            MinValueValidator(0)
         ]
     )
 
