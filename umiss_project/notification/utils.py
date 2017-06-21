@@ -11,16 +11,16 @@ def send_notification(body_signal, msg="O paciente {0} teve um sinal alterado"):
 
     for token in monitor_tokens:
         if token is not None:
-		device = FCMDevice(registration_id=token, type='android')
-		data_message = {
-		    "Type": "ALERTA",
-		    "Title": message_title,
-		    "Body": message_body
-		}
-		device.send_message(
-		    title=message_title,
-		    body=message_body,
-		    data=data_message)
+            device = FCMDevice(registration_id=token, type='android')
+            data_message = {
+                    "Type": "ALERTA",
+                    "Title": message_title,
+                    "Body": message_body
+                    }
+            device.send_message(
+                    title=message_title,
+                    body=message_body,
+                    data=data_message)
 
 def logout_notify(token):        
     device = FCMDevice(registration_id=token, type='android')
