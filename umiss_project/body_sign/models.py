@@ -1,6 +1,14 @@
 from django.db import models
 from django.core.validators import MaxValueValidator, MinValueValidator
 
+class FellChair(models.Model):
+    created = models.DateTimeField(auto_now_add=True)
+
+    owner = models.ForeignKey(
+        'umiss_auth.CustomUser',
+        related_name='fellchair',
+        on_delete=models.CASCADE
+    )
 
 class BodySignal(models.Model):
     created = models.DateTimeField(auto_now_add=True)
