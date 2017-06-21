@@ -57,7 +57,7 @@ class GalvanicResistanceViewSet(viewsets.ModelViewSet):
 
 
 class SkinTemperatureViewSet(viewsets.ModelViewSet):
-    queryset = SkinTemperature.objects.all()
+    queryset = SkinTemperature.objects.order_by('-id')
     serializer_class = SkinTemperatureSerializer
     permission_classes = (permissions.IsAuthenticated,)
 
