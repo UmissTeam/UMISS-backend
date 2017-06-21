@@ -1,7 +1,13 @@
 from rest_framework import serializers
-from body_sign.models import HeartBeats, BodySignal, GalvanicResistance, SkinTemperature
+from body_sign.models import HeartBeats, BodySignal, GalvanicResistance, SkinTemperature, FellChair
 from django.contrib.auth.models import User
 
+class FellChairSerializer(serializers.HyperlinkedModelSerializer):
+    owner = serializers.ReadOnlyField(source='owner.username')
+
+    class Meta:
+        model = FellChair
+        fields = ('owner', 'created')
 
 class HeartBeatsSerializer(serializers.HyperlinkedModelSerializer):
     owner = serializers.ReadOnlyField(source='owner.username')

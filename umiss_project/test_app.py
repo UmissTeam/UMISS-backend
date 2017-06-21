@@ -19,6 +19,7 @@ import argparse
 
 
 signals_to_send = [
+    ('fellchair', 'fellchair'),
     ('heart_beats', 'beats'),
     ('skin_temperatures', 'temperature'),
     ('galvanic_resistances', 'resistance'),
@@ -33,6 +34,7 @@ signals_to_send = [
     ('skin_temperatures', 'temperature'),
     ('skin_temperatures', 'temperature'),
     ('galvanic_resistances', 'resistance'),
+    ('heart_beats', 'beats'),
 ]
 
 
@@ -143,6 +145,7 @@ def create_signals(patient, signal='heart_beats', attribute='beats'):
         headers={'Authorization': 'Token {}'.format(patient['auth_token'])}
     )
 
+    print(signal_response.json())
     validate_response(signal_response)
     return signal_response
 
@@ -200,12 +203,14 @@ if __name__ == "__main__":
     list_heart = list_signals(monitor, 'heart_beats').json()
     list_temp = list_signals(monitor, 'skin_temperatures').json()
     list_galvanic = list_signals(monitor, 'galvanic_resistances').json()
+    list_fell = list_signals(monitor, 'fellchair').json()
 
     print(" Signals:")
     total = 0
     total += print_signals(list_heart)
     total += print_signals(list_temp)
     total += print_signals(list_galvanic)
+    total += print_signals(list_fell)
 
     if total == len(signals_to_send):
         prGreen("\n\nSucesso nos testes!")

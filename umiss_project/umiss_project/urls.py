@@ -30,6 +30,7 @@ router.register(r'skin_temperatures', views.SkinTemperatureViewSet)
 router.register(r'users', UserViewSet)
 router.register(r'monitors', MonitorViewSet)
 router.register(r'patients', PatienteViewSet)
+router.register(r'fellchair', views.FellChairViewSet)
 
 # The API URLs are now determined automatically by the router.
 # Additionally, we include the login URLs for the browsable API.
