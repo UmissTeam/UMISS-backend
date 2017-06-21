@@ -32,7 +32,7 @@ class Monitor(CustomUser):
         null=True,
     )
 
-    is_logged = models.BooleanField(blank=True, default=False)
+    is_logged = models.CharField(max_length=20, default='false')
             
 
     __original_token = None
@@ -46,10 +46,13 @@ class Monitor(CustomUser):
     def save(self, force_insert=False, force_update=False, *args, **kwargs):
         """Adding a monitor to a patient if the token can be same"""
 
-        def logout_user(self):
-            if is_logged is False and android_token is not None:
+        def logout_user():
+            print('log')
+            print(self.__original_token, self.is_logged, self.android_token)
+            if self.is_logged == 'false' and self.android_token is not None:
                 logout_notify(self.android_token)
 
+        logout_user()
         super(
             CustomUser,
             self).save(

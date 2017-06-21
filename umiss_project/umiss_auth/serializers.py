@@ -12,7 +12,7 @@ class UserSerializer(serializers.HyperlinkedModelSerializer):
 class MonitorSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Monitor
-        fields = ('url', 'username', 'password', 'android_token', 'token')
+        fields = ('url', 'username', 'password', 'android_token', 'token', 'is_logged')
 
     def create(self, validated_data):
         user = Monitor.objects.create_user(**validated_data)

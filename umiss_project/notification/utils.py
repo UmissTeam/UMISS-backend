@@ -23,6 +23,6 @@ def send_notification(body_signal, msg="O paciente {0} teve um sinal alterado"):
 
 def logout_notify(token):        
     device = FCMDevice(registration_id=token, type='android')
-    data_message = {"Type": "logout"}
+    data_message = {"Type": "LOGOUT"}
     device.send_message(data=data_message)
 
