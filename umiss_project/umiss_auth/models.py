@@ -41,16 +41,16 @@ class Monitor(CustomUser):
         # patient = PatientUser.objects.filter(token=kwargs['token'])
         # print(args, kwargs, patient)
         super(CustomUser, self).__init__(*args, **kwargs)
-        self.__original_token = self.token
+        self.__original_token = self.android_token
 
     def save(self, force_insert=False, force_update=False, *args, **kwargs):
         """Adding a monitor to a patient if the token can be same"""
 
         def logout_user():
             print('log')
-            print(self.__original_token, self.is_logged, self.android_token)
-            if self.is_logged == 'false' and self.android_token is not None:
-                logout_notify(self.android_token)
+            print(self.__original_token, self.android_token)
+            if self.android_token !=  self.__original_token:
+                logout_notify(self.__original_token)
 
         logout_user()
         super(
