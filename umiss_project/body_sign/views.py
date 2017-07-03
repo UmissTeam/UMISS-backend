@@ -10,6 +10,7 @@ from body_sign.permissions import IsOwnerOrReadOnly
 from body_sign.serializers import HeartBeatsSerializer, SkinTemperatureSerializer, GalvanicResistanceSerializer, FellChairSerializer
 from umiss_auth.models import Monitor
 import body_sign.signals
+import sys
 
 class FellChairViewSet(viewsets.ModelViewSet):
     queryset = FellChair.objects.all()
@@ -38,7 +39,7 @@ class HeartBeatsViewSet(viewsets.ModelViewSet):
         monitor_id = self.request.user.id
         monitor = Monitor.objects.get(id=monitor_id)
         patient = monitor.monitor_user
-        return HeartBeats.objects.filter(owner=patient)
+        return HeartBeats.objects.order_by('-id').filter(owner=patient)
 
 
 class GalvanicResistanceViewSet(viewsets.ModelViewSet):
@@ -53,11 +54,11 @@ class GalvanicResistanceViewSet(viewsets.ModelViewSet):
         monitor_id = self.request.user.id
         monitor = Monitor.objects.get(id=monitor_id)
         patient = monitor.monitor_user
-        return GalvanicResistance.objects.filter(owner=patient)
+        return GalvanicResistance.objects.order_by('-id').filter(owner=patient)
 
 
 class SkinTemperatureViewSet(viewsets.ModelViewSet):
-    queryset = SkinTemperature.objects.order_by('-id')
+    queryset = SkinTemperature.objects.all()
     serializer_class = SkinTemperatureSerializer
     permission_classes = (permissions.IsAuthenticated,)
 
@@ -68,4 +69,4 @@ class SkinTemperatureViewSet(viewsets.ModelViewSet):
         monitor_id = self.request.user.id
         monitor = Monitor.objects.get(id=monitor_id)
         patient = monitor.monitor_user
-        return SkinTemperature.objects.filter(owner=patient)
+        return SkinTemperature.objects.order_by('-id').filter(owner=patient)
